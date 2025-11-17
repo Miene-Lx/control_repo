@@ -1,4 +1,4 @@
-- name: Installer et verfier le service apache2
+- name: Install et verif du service apache2
   hosts: all
   remote_user: root
 

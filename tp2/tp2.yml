@@ -1,10 +1,10 @@
 ---
-- name: Installer apache2 et configure la page d'acceuil
+- name: Installe apache2 et configure la page d'accueil
   hosts: all
   remote_user: root
 
   tasks:
-    - name: Install apache2 mysql-server
+    - name: Installe apache2 et mysql-server
       ansible.builtin.apt:
         update_cache: true
         name: "{{ item }}"
@@ -13,7 +13,7 @@
         - apache2
         - mysql-server
 
-    - name: Gather the rpm package facts
+    - name: Gather dpkg or rpm packager facts
       ansible.builtin.package_facts:
         manager: auto
 

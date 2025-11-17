@@ -1,12 +1,12 @@
 ---
-- name: Installer vim et vérifier /etc/passwd
+- name: Installer vim et verifier /etc/passwd
   hosts: all
   remote_user: administrator
   become: true
   become_user: root
 
   tasks:
-    - name: Install vim
+    - name: Installation de vim
       ansible.builtin.apt:
         name: vim
         state: present
