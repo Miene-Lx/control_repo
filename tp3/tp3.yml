@@ -1,5 +1,5 @@
 ---
-- name: Installe et configure les logiciels sur les machines cibles
+- name: Installe et configure les softs sur les machines cibles
   hosts: all
   tasks:
 
