@@ -1,35 +1,31 @@
 ---
 - name: Installe et configure les logiciels sur les machines cibles
   hosts: all
-  become: yes
   tasks:
-    - name: Mettre à jour la liste des paquets (apt)
-      ansible.builtin.apt:
-        update_cache: yes
-      when: ansible_os_family == 'Debian'
 
-- name: Installe les softs sur les machines web (Ubuntu 22.04)
-  hosts: web
-  become: yes
-  tasks:
-    - name: Installe les paquets pour les serveurs web
+    - name: Installe les softs sur les machines web (Ubuntu 22.04)
       ansible.builtin.apt:
         name: "{{ item }}"
         state: present
+        update_cache: yes
       loop:
         - apache2
         - mysql-server
+      when: ansible_os_family == 'Ubuntu'
 
-- name: Installe les softs sur la machine de dev (Debian 12)
-  hosts: dev
-  become: yes
-  tasks:
     - name: Installe les paquets pour la machine de dev
       ansible.builtin.apt:
         name: "{{ item }}"
         state: present
+        update_cache: yes
       loop:
         - git
         - nginx
         - cowsay
+      when: ansible_os_family == 'Debian'
 
+    - name: Installe les softs sur les machines web (Ubuntu 22.04)
+      ansible.builtin.apt:
+        name: ufw
+        state: present
+      when: ansible_os_family == 'Ubuntu'
