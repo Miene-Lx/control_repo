@@ -1,8 +1,4 @@
 ---
-- name: pour importer les playbooks 3 et 4
-  hosts: all
-
-  tasks:
-  - name: import de tp4
-    ansible.builtin.include_tasks: tp4.yml
-
+- name: Importer les playbooks tp3 et tp4
+  hosts: all  
+  ansible.builtin.import_playbook: tp4.yml 

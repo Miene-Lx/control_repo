@@ -1,10 +1,10 @@
 ---
-- name : Install docker
+- name: Install Docker
   hosts: all
-
+  become: yes  # Nécessaire pour installer Docker et modifier les groupes utilisateurs
   vars:
-    docker_user: 
+    docker_users:
       - administrator
-
   roles:
-    - geerlingguy.docker 
+    - geerlingguy.docker
+
