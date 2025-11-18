@@ -1,0 +1,7 @@
+[web]
+vm1 ansible_host=127.0.0.1
+vm2 ansible_host=192.168.1.187
+
+[dev]
+vm3 ansible_host=192.168.1.68
+

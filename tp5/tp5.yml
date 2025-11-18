@@ -1,0 +1,9 @@
+---
+- hosts: all
+
+  tasks:
+    - name: Import tp4
+      ansible.builtin.import_tasks: tp4.yml
+
+    - name: Import tp3
+      ansible.builtin.import_tasks: tp3.yml
