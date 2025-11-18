@@ -57,9 +57,23 @@
       ansible.builtin.copy:
         dest: /etc/jour
         content: "pair et plus tard que midi"
-        force: no  # Evite d'ecraser le fichier si le contenu est identique
       when:
         - ansible_date_time.day | int % 2 == 0  # Jour pair
         - ansible_date_time.hour | int >= 12    # Plus de 12h00
-      become: yes
+
+    - name: Ecrit "pair et avant midi" dans /etc/jour si conditions remplies
+      ansible.builtin.copy:
+        dest: /etc/jour
+        content: "pair et avant midi"
+      when:
+        - ansible_date_time.day | int % 2 == 0  # Jour pair
+        - ansible_date_time.hour | int < 12     # Moins de 12h00
+
+    - name: Ecrit "impair et plus tard que midi" dans /etc/jour si conditions remplies
+      ansible.builtin.copy:
+        dest: /etc/jour
+        content: "impair et plus tard que midi"
+      when:
+        - ansible_date_time.day | int % 2 != 0  # Jour impair
+        - ansible_date_time.hour | int >= 12    # Plus de 12h00
 
