@@ -52,3 +52,14 @@
         name: nginx
         state: started
       when: "'nginx' in ansible_facts.packages"    
+
+    - name: Ecrit dans /etc/jour selon le jour et l'heure
+      ansible.builtin.copy:
+        dest: /etc/jour
+        content: "pair et plus tard que midi"
+        force: no  # Evite d'ecraser le fichier si le contenu est identique
+      when:
+        - ansible_date_time.day | int % 2 == 0  # Jour pair
+        - ansible_date_time.hour | int >= 12    # Plus de 12h00
+      become: yes
+
