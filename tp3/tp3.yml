@@ -1,5 +1,5 @@
 ---
-- name: Installe les softs sur les machines cibles
+- name: Installe et configure les logiciels sur les machines cibles
   hosts: all
   become: yes
   tasks:
@@ -8,36 +8,28 @@
         update_cache: yes
       when: ansible_os_family == 'Debian'
 
-- name: Installe Apache et MySQL sur les machines web
+- name: Installe les softs sur les machines web (Ubuntu 22.04)
   hosts: web
   become: yes
   tasks:
-    - name: Installe Apache2
+    - name: Installe les paquets pour les serveurs web
       ansible.builtin.apt:
-        name: apache2
+        name: "{{ item }}"
         state: present
+      loop:
+        - apache2
+        - mysql-server
 
-    - name: Installe MySQL Server
-      ansible.builtin.apt:
-        name: mysql-server
-        state: present
-
-- name: Installe Git, Nginx et cowsay sur la machine de dev
+- name: Installe les softs sur la machine de dev (Debian 12)
   hosts: dev
   become: yes
   tasks:
-    - name: Installer Git
+    - name: Installe les paquets pour la machine de dev
       ansible.builtin.apt:
-        name: git
+        name: "{{ item }}"
         state: present
-
-    - name: Installer Nginx
-      ansible.builtin.apt:
-        name: nginx
-        state: present
-
-    - name: Installer cowsay
-      ansible.builtin.apt:
-        name: cowsay
-        state: present
+      loop:
+        - git
+        - nginx
+        - cowsay
 
