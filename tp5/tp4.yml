@@ -1,9 +1,10 @@
 ---
-- hosts: all
+- name : Install docker
+  hosts: all
 
   vars:
     docker_user: 
       - administrator
 
   roles:
-    - geerlingguy.docker
+    - geerlingguy.docker 
