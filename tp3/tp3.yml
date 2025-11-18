@@ -77,3 +77,10 @@
         - ansible_date_time.day | int % 2 != 0  # Jour impair
         - ansible_date_time.hour | int >= 12    # Plus de 12h00
 
+    - name: Écrire "impair et avant midi" dans /etc/jour si conditions remplies
+      ansible.builtin.copy:
+        dest: /etc/jour
+        content: "impair et avant midi"
+      when:
+        - ansible_date_time.day | int % 2 != 0
+        - ansible_date_time.hour | int < 12
