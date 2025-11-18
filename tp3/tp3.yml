@@ -1,0 +1,43 @@
+---
+- name: Installe les softs sur les machines cibles
+  hosts: all
+  become: yes
+  tasks:
+    - name: Mettre à jour la liste des paquets (apt)
+      ansible.builtin.apt:
+        update_cache: yes
+      when: ansible_os_family == 'Debian'
+
+- name: Installe Apache et MySQL sur les machines web
+  hosts: web
+  become: yes
+  tasks:
+    - name: Installe Apache2
+      ansible.builtin.apt:
+        name: apache2
+        state: present
+
+    - name: Installe MySQL Server
+      ansible.builtin.apt:
+        name: mysql-server
+        state: present
+
+- name: Installe Git, Nginx et cowsay sur la machine de dev
+  hosts: dev
+  become: yes
+  tasks:
+    - name: Installer Git
+      ansible.builtin.apt:
+        name: git
+        state: present
+
+    - name: Installer Nginx
+      ansible.builtin.apt:
+        name: nginx
+        state: present
+
+    - name: Installer cowsay
+      ansible.builtin.apt:
+        name: cowsay
+        state: present
+
