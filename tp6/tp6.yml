@@ -35,13 +35,23 @@
         extra_parameters: |
           ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000/var/www/wordpress"
 
+  roles:
+    - geerlingguy.apache
+    - geerlingguy.php
+    - geerlingguy.apache-php-fpm
+
   tasks: 
     - name: uncompress wordpress
       ansible.builtin.unarchive:
         src: https://fr.wordpress.org/wordpress-6.8.3-fr_FR.tar.gz
         dest: /var/www
         remote_src: true
-  roles:
-    - geerlingguy.apache
-    - geerlingguy.php
-    - geerlingguy.apache-php-fpm
+
+
+
+    - name: Configure wordpress wp-config.php
+      ansible.builtin.template:
+        src: templates/wp-config.j2
+        dest: /var/www/wordpress/wp-config.php
+        mode: '0644'
+
