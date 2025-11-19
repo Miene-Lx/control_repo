@@ -1,3 +1,9 @@
 skip_list:
-  - no-changed-when
-  - experimental
+  - yaml
+  - fqcn
+
+warn_list:
+  - jinja
+
+exclude_paths:
+  - playbooks/examples/

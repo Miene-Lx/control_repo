@@ -1,0 +1,28 @@
+---
+- name : Install DB
+  hosts: db
+
+  vars:
+    mysql_root_password: xxxpassword
+    mysql_databases:
+        - name: DBtest
+          encoding: latin1
+          collation: latin1_general_ci
+    mysql_users:
+        - name: user1
+          host: "%"
+          password: user1pass
+          priv: "DBtest.*:ALL"
+
+  roles:
+    - geerlingguy.mysql
+
+- name: Install apache & wordpress
+  hosts: web
+
+
+- name: Unarchive a file that needs to be downloaded 
+  hosts: web
+    ansible.builtin.unarchive:
+      src: https://fr.wordpress.org/wordpress-6.8.3-fr_FR.tar.gz
+      dest: /var/www
