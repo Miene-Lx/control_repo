@@ -17,9 +17,6 @@
   roles:
     - geerlingguy.mysql
 
-- name: Install apache & wordpress
-  hosts: web
-
 
 - name: Unarchive a file that needs to be downloaded 
   hosts: web
