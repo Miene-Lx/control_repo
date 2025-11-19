@@ -1,6 +1,6 @@
 ---
 - name: Importer les playbooks tp3 et tp4
-hosts: all
+  hosts: all
 
 - name: import tp4
   ansible.builtin.import_playbook: tp4.yml
